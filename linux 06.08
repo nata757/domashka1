@@ -2,3 +2,367 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin git@github.com:nata757/git2.git
 git push -u origin main
+
+First level: Сделать файл скрипта, который выполнит:
+Создаст файл и запишет в него информацию из команды df  -h о дисковом пространстве, но оставит в информации для
+ записи лишь последний столбец в последней строчке, где заменит слово user на ваше имя.(можно сделать последнюю
+ строчку двумя способами через grep -w и через tail)
+Выведет на экран содержимое созданного файла.
+Что понадобится:
+awk
+sed
+Second level: Сделать скрипт fullscript.sh , который покажет:
+выведет строчку со словами:
+Hello Student!
+попросит ввести Ваше имя
+выведет строчку:
+“Welcome to terminal $name"
+создаст папку test в каталоге tmp
+создаст файл под названием mydate.txt в папке /tmp
+запишет в новосозданный файл mydate.txt  текущее время (не просто дату)
+выведет на экран надпись “Сохраняем данные” и начнет отсчет до 10 с интервалом в полсекунды.
+выведет на экран “Data saved. continue work”
+дозапишет в файл mydate.txt все сведения о состоянии нашего диска в человеческом виде.
+скопируем файл mydate.txt в новую подпапку mydate в папке /opt/  с переименованием файла в newmydate.txt
+снова сделать интервал ожидания, но уже с отсчетом в пять раз по одной секунде и вывести на экран фразу “Well done Boss”
+сделать файл исполняемым из любого места в системе.
+что понадобится:
+echo "hello Student"
+echo -n "Enter your name: "
+read name
+++++++++++++++++++
+Сделать репозиторий на своем компьютере и перенести его в github используя необходимые команды
+
+
+
+
+
+
+#!/bin/bash
+df -h | tail -1 | awk '{print $6}' | sed 's/user/ivan/g' > 1.txt
+cat 1.txt
+
+
+--------------------------------------------------------------------------------------------------------------
+
+$ ssh -i ~/.ssh/id_rsa ec2-user@linux.telran-edu.de
+Last login: Sat Aug 13 08:50:24 2022 from dynamic-002-212-234-197.2.212.pool.telefonica.de
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@ip-172-31-33-20 ~]$ cd /opt/35_36_evening/Nata.K
+[ec2-user@ip-172-31-33-20 Nata.K]$ ls
+1.txt  fullscript.sh  sleeper.sh  taskNatalie.sh.save  taskNatalie.sh.save.1
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -l
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+You have new mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -1
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -2
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -5
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -4
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -4
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -3
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -6
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -7
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -7
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head 2
+head: cannot open ‘2’ for reading: No such file or directory
+[ec2-user@ip-172-31-33-20 Nata.K]$
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -2
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head +3
+head: cannot open ‘+3’ for reading: No such file or directory
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head 3
+head: cannot open ‘3’ for reading: No such file or directory
+[ec2-user@ip-172-31-33-20 Nata.K]$ -3
+-bash: -3: command not found
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -l
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -2
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -2
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -l
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | tail -l
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.9G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -4
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -2
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3 |tail -1
+tmpfs           483M     0  483M   0% /dev/shm
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3 |tail -1 | awk '{print $6}
+>
+> df -h | head -3 |tail -1 | awk '{print $6}
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:         ^ syntax error
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:                  ^ syntax error
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:                            ^ syntax error
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:                                      ^ unexpected newline or end of string
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3 |tail -1 | awk '{print $6}
+
+df -h | head -3 |tail -1 | awk '{print $cd ..
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:         ^ syntax error
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:                  ^ syntax error
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:                            ^ syntax error
+awk: cmd. line:3: df -h | head -3 |tail -1 | awk {print
+awk: cmd. line:3:                                      ^ unexpected newline or end of string
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ cd
+[ec2-user@ip-172-31-33-20 ~]$ cd /opt/35_36_evening/Nata.K
+[ec2-user@ip-172-31-33-20 Nata.K]$ ls
+1.txt  fullscript.sh  sleeper.sh  taskNatalie.sh.save  taskNatalie.sh.save.1
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3 |tail -1 | awk '{print $6}'
+/dev/shm
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3 |tail -1 | awk '{print $6}' | sed 's/shm/Nata.K/g'
+/dev/Nata.K
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3 |tail -1 | awk '{print $6}' | sed 's/shm/Nata.K/g' > 1.txt
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ df -h | head -3 |tail -1 | awk '{print $6}' | sed 's/shm/Nata.K/g' > 1.txt
+[ec2-user@ip-172-31-33-20 Nata.K]$ cat 1.txt
+/dev/Nata.K
+[ec2-user@ip-172-31-33-20 Nata.K]$ nano 1.sh
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ chmod 744 1.sh
+[ec2-user@ip-172-31-33-20 Nata.K]$ ls
+1.sh   fullscript.sh  taskNatalie.sh.save
+1.txt  sleeper.sh     taskNatalie.sh.save.1
+[ec2-user@ip-172-31-33-20 Nata.K]$ ./1.sh
+/dev/Nata.K
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ nano fullscript.sh
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ ./fullscript.sh
+hello student
+Enter your name:nata
+Welcome to terminal nata
+Saving data
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+./fullscript.sh: line 21: syntax error near unexpected token `echo'
+./fullscript.sh: line 21: `done echo "Well done Boss"'
+[ec2-user@ip-172-31-33-20 Nata.K]$ nano fullscript.sh
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ ./fullscript.sh
+hello student
+Enter your name:nata
+Welcome to terminal nata
+Saving data
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Data saved,continue work
+1
+2
+3
+4
+5
+Well done Boss
+[ec2-user@ip-172-31-33-20 Nata.K]$ cat /opt/mydate/newmydate.txt
+09_40_33
+Data saved, continue work df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  644K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.3G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  644K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.3G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  644K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+You have mail in /var/spool/mail/ec2-user
+[ec2-user@ip-172-31-33-20 Nata.K]$ cat /opt/mydate/newmydate.txt
+09_40_33
+Data saved, continue work df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  644K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.3G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  644K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.3G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  612K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           483M     0  483M   0% /dev/shm
+tmpfs           483M  644K  483M   1% /run
+tmpfs           483M     0  483M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  5.8G  2.2G  73% /
+tmpfs            97M     0   97M   0% /run/user/1000
+[ec2-user@ip-172-31-33-20 Nata.K]$ exit 
+
+
+
